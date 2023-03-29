@@ -1,0 +1,15 @@
+{
+    "name": "pi",
+    "short_name": "π",
+    "icons": [
+        {
+            "src": "icon-128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#262626"
+}
