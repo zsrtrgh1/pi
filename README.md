@@ -17,4 +17,4 @@ PWA化してみたのでアプリのように動かすことができます。
   - よくわかりません
 
 ---
-### URL : ![zsrtrgh1.github.io/pi](https://zsrtrgh1.github.io/pi)
+### URL : [zsrtrgh1.github.io/pi](https://zsrtrgh1.github.io/pi)
