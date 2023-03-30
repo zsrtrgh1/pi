@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" id="html">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,13 +31,14 @@
             }
         </style>
     </head>
-    <body>
+    <body onclick="loop();">
         <h1 id="pi"></h1>
-        <button onclick="loop();">Loop</button>
         <script>
+            let flag = 0;
             function speak(text) {
                 return new Promise(function (resolve, reject) {
                     var utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = "ja-JP";
                     window.speechSynthesis.speak(utterance);
                     utterance.onend = function () {
                         resolve();
@@ -48,20 +49,16 @@
                 });
             }
             let char = "";
+            let count = 1;
             const loop = async () => {
-                console.log("hello");
-                let count = 1;
                 while (true) {
                     for (let i = 0; i < count; i++) {
                         char += String(pi.charAt(i));
                     }
+                    await speak("3." + char);
                     document.getElementById("pi").innerHTML =
                         "3.<br>" + char.replace(/(.{10})/g, "$1<br>");
-                    await speak("3." + char);
                     char = "";
-                    if (count >= 100) {
-                        document.html.style.mixBlendMode = "difference";
-                    }
                     count++;
                 }
             };
