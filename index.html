@@ -33,31 +33,35 @@
     </head>
     <body>
         <h1 id="pi"></h1>
+        <button onclick="loop();">Loop</button>
         <script>
-            const sleep = (waitTime) =>
-                new Promise((resolve) => setTimeout(resolve, waitTime));
-
-            sleep(2000);
-            let speechOption = new SpeechSynthesisUtterance();
-            speechOption.rate = 0.8;
-            speechOption.pitch = 0;
-
-            const speak = (text) => {
-                speechOption.text = text;
-                speechSynthesis.speak(speechOption);
-            };
+            function speak(text) {
+                return new Promise(function (resolve, reject) {
+                    var utterance = new SpeechSynthesisUtterance(text);
+                    window.speechSynthesis.speak(utterance);
+                    utterance.onend = function () {
+                        resolve();
+                    };
+                    utterance.onerror = function () {
+                        reject();
+                    };
+                });
+            }
             let char = "";
             const loop = async () => {
+                console.log("hello");
                 let count = 1;
                 while (true) {
                     for (let i = 0; i < count; i++) {
                         char += String(pi.charAt(i));
                     }
-                    await speak("3." + char);
-                    await sleep(300 * count * speechOption.rate);
                     document.getElementById("pi").innerHTML =
                         "3.<br>" + char.replace(/(.{10})/g, "$1<br>");
+                    await speak("3." + char);
                     char = "";
+                    if (count >= 100) {
+                        document.html.style.mixBlendMode = "difference";
+                    }
                     count++;
                 }
             };
